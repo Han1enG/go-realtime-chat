@@ -72,8 +72,8 @@ func HandleChatUI(client *internal.Client) (bool, error) {
 			case "<C-c>":
 				return false, nil
 			case "<Enter>":
-				if chatUI.IsInputMode() && len(inputBox.Text) > 0 {
-					inputText := chatUI.GetInputText()
+				inputText := chatUI.GetInputText()
+				if chatUI.IsInputMode() && len(inputText) > 0 {
 					if inputText == "/quit" {
 						return false, nil
 					}
