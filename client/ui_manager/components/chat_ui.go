@@ -196,7 +196,7 @@ func (cu *ChatUI) GetInputText() string {
 
 func (cu *ChatUI) HandleKeyPress(key string) {
 	switch key {
-	case "<Backspace>":
+	case "<Backspace>", "<C-<Backspace>>":
 		if len(cu.inputText) > 0 {
 			cu.inputText = cu.inputText[:len(cu.inputText)-1]
 		}

@@ -121,6 +121,10 @@ func (mr *MessageRouter) handleGroupMessage(payload protocol.Payload, info *conn
 }
 
 func (mr *MessageRouter) handleWhisper(payload protocol.Payload, info *connection.ConnectionInfo) {
+	if payload.Sender == payload.Recipient {
+		mr.sendSysResponse(info.Connection, "You cannot send a whisper to yourself", "fail")
+		return
+	}
 	recipientConn, found := mr.server.connectionManager.FindConnectionByOwnerName(payload.Recipient)
 	if !found || recipientConn == nil {
 		mr.sendSysResponse(info.Connection, "Recipient not found or connection lost", "fail")
